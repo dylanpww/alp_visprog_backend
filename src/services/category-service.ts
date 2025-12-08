@@ -12,13 +12,11 @@ export class CategoryService {
                 name: 'asc'
             }
         })
-
         return toCategoryResponseList(categories)
     } 
 
     static async getCategory(categoryId: number): Promise<CategoryResponse> {
         const category = await this.checkCategoryExists(categoryId)
-
         return toCategoryResponse(category)
     }
 
@@ -32,7 +30,6 @@ export class CategoryService {
         if (!category) {
             throw new ResponseError(400, "Category not found!")
         }
-
         return category
     }
 
@@ -57,7 +54,6 @@ export class CategoryService {
                 name: validatedData.name
             }
         })
-
         return "Category has been created successfully!"
     }
 
@@ -104,7 +100,7 @@ export class CategoryService {
                 categoryId: categoryId
             }
         })
-        
+
         await prismaClient.category.delete({
             where: {
                 id: categoryId

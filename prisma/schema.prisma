@@ -5,7 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../generated/prisma"
 }
 
@@ -24,4 +24,13 @@ model User {
   // plans   Plan[]
 
   @@map("users")
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique @db.VarChar(100)
+
+  // destinations Destination[]
+
+  @@map("categories")
 }

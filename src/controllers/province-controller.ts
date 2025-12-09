@@ -1,15 +1,16 @@
 import { NextFunction, Request, Response } from 'express'
-import { CategoryService } from '../services/category-service'
-import { CategoryCreateRequest, CategoryUpdateRequest } from '../models/category-model'
+import { ProvinceService } from '../services/province-service'
+import { ProvinceCreateRequest, ProvinceUpdateRequest } from '../models/province-model'
 
-export class CategoryController {
-    static async getAllCategories(
+export class ProvinceController {
+    static async getAllProvinces(
         req: Request,
         res: Response,
         next: NextFunction
     ) {
         try {
-            const response = await CategoryService.getAllCategories()
+            const response = await ProvinceService.getAllProvinces()
+
             res.status(200).json({
                 data: response,
             })
@@ -18,10 +19,12 @@ export class CategoryController {
         }
     }
     
-    static async getCategory(req: Request, res: Response, next: NextFunction) {
+    static async getProvince(req: Request, res: Response, next: NextFunction) {
         try {
-            const categoryId = Number(req.params.categoryId)
-            const response = await CategoryService.getCategory(categoryId)
+            const provinceId = Number(req.params.provinceId)
+
+            const response = await ProvinceService.getProvince(provinceId)
+
             res.status(200).json({
                 data: response,
             })
@@ -30,14 +33,16 @@ export class CategoryController {
         }
     }
 
-    static async createCategory(
+    static async createProvince(
         req: Request,
         res: Response,
         next: NextFunction
     ) {
         try {
-            const reqData = req.body as CategoryCreateRequest
-            const response = await CategoryService.createCategory(reqData)
+            const reqData = req.body as ProvinceCreateRequest
+
+            const response = await ProvinceService.createProvince(reqData)
+
             res.status(200).json({
                 data: response,
             })
@@ -46,18 +51,20 @@ export class CategoryController {
         }
     }
 
-    static async updateCategory(
+    static async updateProvince(
         req: Request,
         res: Response,
         next: NextFunction
     ) {
         try {
-            const reqData = req.body as CategoryUpdateRequest
-            const categoryId = Number(req.params.categoryId)
-            const response = await CategoryService.updateCategory(
+            const reqData = req.body as ProvinceUpdateRequest
+            const provinceId = Number(req.params.provinceId)
+
+            const response = await ProvinceService.updateProvince(
                 reqData,
-                categoryId
+                provinceId
             )
+
             res.status(200).json({
                 data: response,
             })
@@ -66,14 +73,16 @@ export class CategoryController {
         }
     }
 
-    static async deleteCategory(
+    static async deleteProvince(
         req: Request,
         res: Response,
         next: NextFunction
     ) {
         try {
-            const categoryId = Number(req.params.categoryId)
-            const response = await CategoryService.deleteCategory(categoryId)
+            const provinceId = Number(req.params.provinceId)
+
+            const response = await ProvinceService.deleteProvince(provinceId)
+
             res.status(200).json({
                 data: response,
             })

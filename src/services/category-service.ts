@@ -9,7 +9,7 @@ export class CategoryService {
     static async getAllCategories(): Promise<CategoryResponse[]> {
         const categories = await prismaClient.category.findMany({
             orderBy: {
-                name: 'asc'
+                name: 'desc'
             }
         })
         return toCategoryResponseList(categories)

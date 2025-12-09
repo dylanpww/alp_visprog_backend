@@ -1,6 +1,6 @@
 import z, { ZodType } from "zod"
 
-export class CategoryValidation {
+export class ProvinceValidation {
     static readonly CREATE: ZodType = z.object({
         name: z
             .string({

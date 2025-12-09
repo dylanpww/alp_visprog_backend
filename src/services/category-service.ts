@@ -95,11 +95,11 @@ export class CategoryService {
     static async deleteCategory(categoryId: number): Promise<string> {
         await this.checkCategoryExists(categoryId)
 
-        // await prismaClient.destination.deleteMany({
-        //     where: {
-        //         categoryId: categoryId
-        //     }
-        // })
+        await prismaClient.destination.deleteMany({
+            where: {
+                categoryId: categoryId
+            }
+        })
 
         await prismaClient.category.delete({
             where: {

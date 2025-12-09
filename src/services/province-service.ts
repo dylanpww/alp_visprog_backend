@@ -12,7 +12,6 @@ export class ProvinceService {
                 name: 'desc'
             }
         })
-
         return toProvinceResponseList(provinces)
     } 
 
@@ -29,9 +28,8 @@ export class ProvinceService {
         })
 
         if (!province) {
-            throw new ResponseError(404, "Province not found!")
+            throw new ResponseError(400, "Province not found!")
         }
-
         return province
     }
 
@@ -48,7 +46,7 @@ export class ProvinceService {
         })
 
         if (existingProvince) {
-            throw new ResponseError(409, "Province name already exists!")
+            throw new ResponseError(400, "Province name already exists!")
         }
 
         await prismaClient.province.create({
@@ -56,7 +54,6 @@ export class ProvinceService {
                 name: validatedData.name
             }
         })
-
         return "Province has been created successfully!"
     }
 
@@ -81,7 +78,7 @@ export class ProvinceService {
         })
 
         if (existingProvince) {
-            throw new ResponseError(409, "Province name already exists!")
+            throw new ResponseError(400, "Province name already exists!")
         }
 
         await prismaClient.province.update({
@@ -92,25 +89,23 @@ export class ProvinceService {
                 name: validatedData.name
             }
         })
-
         return "Province has been updated successfully!"
     }
 
     static async deleteProvince(provinceId: number): Promise<string> {
         await this.checkProvinceExists(provinceId)
 
-        // await prismaClient.destination.deleteMany({
-        //     where: {
-        //         provinceId: provinceId
-        //     }
-        // })
+        await prismaClient.destination.deleteMany({
+            where: {
+                provinceId: provinceId
+            }
+        })
 
         await prismaClient.province.delete({
             where: {
                 id: provinceId
             }
         })
-        
-        return "Province has been deleted successfully!"
+        return "Province and all related destinations have been deleted successfully!"
     }
 }

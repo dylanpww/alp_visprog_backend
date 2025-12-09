@@ -9,5 +9,5 @@ app.use(express.json())
 app.use("/api", publicRouter)
 app.use("/api", privateRouter)
 app.listen(PORT || 3000, () => {
-    console.log('Conected to port ${PORT}')
+    console.log(`Server is running on port ${PORT || 3000}`)
 })

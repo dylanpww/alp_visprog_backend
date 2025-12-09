@@ -34,3 +34,14 @@ model Category {
 
   @@map("categories")
 }
+
+model Province {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique @db.VarChar(100)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // destinations Destination[]
+
+  @@map("provinces")
+}

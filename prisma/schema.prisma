@@ -51,7 +51,7 @@ model Destination {
   name        String @db.VarChar(150)
   description String @db.Text
   location    String @db.VarChar(200)
-  rating      Int
+  rating      Float  @default(0.0)
   pictureUrl  String @db.VarChar(255)
   pictureUrl2 String @db.VarChar(255)
 

@@ -2,6 +2,7 @@ import express from 'express'
 import { UserController } from '../controllers/user-controller'
 import { CategoryController } from '../controllers/category-controller'
 import { ProvinceController } from '../controllers/province-controller'
+import { DestinationController } from '../controllers/destination-controller'
 
 export const publicRouter = express.Router()
 
@@ -19,3 +20,9 @@ publicRouter.get("/provinces/:provinceId", ProvinceController.getProvince);
 publicRouter.post("/provinces", ProvinceController.createProvince);
 publicRouter.put("/provinces/:provinceId", ProvinceController.updateProvince);
 publicRouter.delete("/provinces/:provinceId", ProvinceController.deleteProvince);
+
+publicRouter.get("/destinations", DestinationController.list);
+publicRouter.get("/destinations/:destinationId", DestinationController.get);
+publicRouter.post("/destinations", DestinationController.create);
+publicRouter.put("/destinations/:destinationId", DestinationController.update);
+publicRouter.delete("/destinations/:destinationId", DestinationController.remove);

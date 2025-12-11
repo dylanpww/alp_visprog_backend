@@ -21,7 +21,7 @@ model User {
   password String @db.VarChar(100)
 
   // reviews  Review[]
-  // plans   Plan[]
+  plans Plan[]
 
   @@map("users")
 }
@@ -58,9 +58,36 @@ model Destination {
   categoryId Int
   provinceId Int
 
-  category Category @relation(fields: [categoryId], references: [id])
-  province Province @relation(fields: [provinceId], references: [id])
+  category         Category          @relation(fields: [categoryId], references: [id])
+  province         Province          @relation(fields: [provinceId], references: [id])
   //reviews    Review[]
+  destinationPlans DestinationPlan[]
 
   @@map("destinations")
+}
+
+model Plan {
+  id          Int    @id @default(autoincrement())
+  name        String @db.VarChar(150)
+  description String @db.Text
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  destinations DestinationPlan[]
+
+  @@map("plans")
+}
+
+model DestinationPlan {
+  id        Int     @id @default(autoincrement())
+  isVisited Boolean @default(false)
+
+  planId Int
+  plan   Plan @relation(fields: [planId], references: [id], onDelete: Cascade)
+
+  destinationId Int
+  destination   Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+
+  @@map("destination_plans")
 }

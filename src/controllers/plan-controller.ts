@@ -7,12 +7,16 @@ import {
     UpdateDestinationStatusRequest,
     toPlanResponse
 } from '../models/plan-model'
+import { UserRequest } from '../models/user-request-model'
 
 export class PlanController {
 
-    static async getAllPlans(req: Request, res: Response, next: NextFunction) {
+    static async getAllPlans(req: UserRequest, res: Response, next: NextFunction) {
         try {
-            const userId = Number(req.query.userId) 
+            if (!req.user) {
+                throw new Error("No user data found!")
+            }
+            const userId = req.user.id
             
             const response = await PlanService.getAllPlans(userId)
             
@@ -37,9 +41,14 @@ export class PlanController {
         }
     }
 
-    static async createPlan(req: Request, res: Response, next: NextFunction) {
+    static async createPlan(req: UserRequest, res: Response, next: NextFunction) {
         try {
+
+            if (!req.user) {
+                throw new Error("No user data found!")
+            }
             const request = req.body as CreatePlanRequest
+            request.userId = req.user!.id
             const response = await PlanService.createPlan(request)
             res.status(201).json({
                 data: response

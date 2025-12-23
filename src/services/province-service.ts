@@ -9,7 +9,7 @@ export class ProvinceService {
     static async getAllProvinces(): Promise<ProvinceResponse[]> {
         const provinces = await prismaClient.province.findMany({
             orderBy: {
-                name: 'desc'
+                name: 'asc'
             }
         })
         return toProvinceResponseList(provinces)

@@ -3,12 +3,14 @@ import { Category } from "../../generated/prisma"
 export interface CategoryResponse {
     id: number
     name: string
+    icon: string
 }
 
 export function toCategoryResponse(prismaCategory: Category): CategoryResponse {
     return {
         id: prismaCategory.id,
-        name: prismaCategory.name
+        name: prismaCategory.name,
+        icon: prismaCategory.icon
     }
 }
 
@@ -18,8 +20,10 @@ export function toCategoryResponseList(prismaCategories: Category[]): CategoryRe
 
 export interface CategoryCreateRequest {
     name: string
+    icon: string
 }
 
 export interface CategoryUpdateRequest {
     name: string
+    icon: string
 }

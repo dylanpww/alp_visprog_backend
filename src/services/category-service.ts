@@ -9,7 +9,7 @@ export class CategoryService {
     static async getAllCategories(): Promise<CategoryResponse[]> {
         const categories = await prismaClient.category.findMany({
             orderBy: {
-                name: 'desc'
+                name: 'asc'
             }
         })
         return toCategoryResponseList(categories)
@@ -51,7 +51,8 @@ export class CategoryService {
 
         await prismaClient.category.create({
             data: {
-                name: validatedData.name
+                name: validatedData.name,
+                icon: validatedData.icon
             }
         })
         return "Category has been created successfully!"
@@ -86,7 +87,8 @@ export class CategoryService {
                 id: categoryId
             },
             data: {
-                name: validatedData.name
+                name: validatedData.name,
+                icon: validatedData.icon
             }
         })
         return "Category has been updated successfully!"

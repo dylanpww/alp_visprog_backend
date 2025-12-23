@@ -11,6 +11,16 @@ export class CategoryValidation {
             })
             .max(50, {
                 error: "Name cannot exceed 50 characters!"
+            }),
+        icon: z
+            .string({
+                error: "Icon must be a string!"
+            })
+            .min(1, {
+                error: "Icon cannot be empty!"
+            })
+            .max(100, {
+                error: "Icon cannot exceed 100 characters!"
             })
     })
 
@@ -24,6 +34,16 @@ export class CategoryValidation {
             })
             .max(50, {
                 error: "Name cannot exceed 50 characters!"
+            }),
+        icon: z
+            .string({
+                error: "Icon must be a string!"
+            })
+            .min(1, {
+                error: "Icon cannot be empty!"
+            })
+            .max(100, {
+                error: "Icon cannot exceed 100 characters!"
             })
     })
 }

@@ -1,3 +1,4 @@
+import "dotenv/config"
 import express from "express"
 import { PORT } from "./utils/env-util"
 import { publicRouter } from "./routes/public-api"

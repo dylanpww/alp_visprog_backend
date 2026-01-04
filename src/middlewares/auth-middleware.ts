@@ -25,7 +25,13 @@ export const authMiddleware = (
         }
 
         next()
-    } catch (error) {
-        next(error)
+    } catch (error : any) {
+        if (error.name === "TokenExpiredError") {
+            return next(new ResponseError(401, "Token expired, please login again"))
+        }
+        if (error.name === "JsonWebTokenError") {
+            return next(new ResponseError(401, "Invalid token"))
+        }
+        next(new ResponseError(500, "Internal Server Error"))
     }
 }

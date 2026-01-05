@@ -1,7 +1,7 @@
 import { NextFunction, Response } from "express"
 import { UserRequest } from "../models/user-request-model"
 import { DestinationService } from "../services/destination-service"
-import { DestinationCreateRequest, DestinationUpdateRequest } from "../models/destination-model"
+import { DestinationCreateRequest, DestinationUpdateRequest, FilterDestinationRequest } from "../models/destination-model"
 
 export class DestinationController {
     
@@ -90,6 +90,26 @@ export class DestinationController {
 
             res.status(200).json({
                 data: "OK"
+            })
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    static async filter(req: Request, res: Response, next: NextFunction) {
+        try {
+            const request = req.body as FilterDestinationRequest
+            
+            // Konversi ke number agar aman
+            const cleanRequest: FilterDestinationRequest = {
+                categoryId: request.categoryId ? Number(request.categoryId) : undefined,
+                provinceId: request.provinceId ? Number(request.provinceId) : undefined
+            }
+
+            const response = await DestinationService.filter(cleanRequest)
+
+            res.status(200).json({
+                data: response,
             })
         } catch (error) {
             next(error)

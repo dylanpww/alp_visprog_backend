@@ -4,6 +4,7 @@ import {
     DestinationCreateRequest,
     DestinationResponse,
     DestinationUpdateRequest,
+    FilterDestinationRequest,
     toDestinationResponse,
     toDestinationResponseList
 } from "../models/destination-model"
@@ -99,6 +100,26 @@ export class DestinationService {
 
     static async list(): Promise<Array<DestinationResponse>> {
         const destinations = await prismaClient.destination.findMany()
+        return toDestinationResponseList(destinations)
+    }
+
+    static async filter(request: FilterDestinationRequest): Promise<Array<DestinationResponse>> {
+        const filter: any = {}
+
+        // Cek jika ada categoryId
+        if (request.categoryId) {
+            filter.categoryId = request.categoryId
+        }
+
+        // Cek jika ada provinceId
+        if (request.provinceId) {
+            filter.provinceId = request.provinceId
+        }
+
+        const destinations = await prismaClient.destination.findMany({
+            where: filter
+        })
+
         return toDestinationResponseList(destinations)
     }
 }

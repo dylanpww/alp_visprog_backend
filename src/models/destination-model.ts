@@ -51,3 +51,8 @@ export interface DestinationUpdateRequest {
     categoryId?: number
     provinceId?: number
 }
+
+export interface FilterDestinationRequest {
+    categoryId?: number
+    provinceId?: number
+}
